@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Swagger Core",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "Integrations",
+      "description": "Everything about your Integrations",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/integration": {
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Create a integration",
+        "description": "Summary about the integration",
+        "operationId": "CreateIntegration",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User object that needs to be added to the Integration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/integrations"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Get All the integrations",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "Integration",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/integrations"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/integration/{integrationName}": {
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Finds Integration by Name",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findIntegrationByIntegrationName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "integrationName",
+            "in": "path",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/integrations"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Delete an existing integration",
+        "description": "",
+        "operationId": "deleteIntegration",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "integrationName",
+            "in": "path",
+            "description": "Team object that needs to be deleted from the Teams",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully deleted "
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Team not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "integrations": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "integrationName": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "integrationDescription": {
+          "type": "string"
+        },
+        "integrationsUrl": {
+          "type": "string"
+        },
+        "websiteUrl": {
+          "type": "string"
+        },
+        "EmailIdOfAuthour": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

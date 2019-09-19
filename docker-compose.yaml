@@ -1,0 +1,7 @@
+version: '3.5'
+services:
+  webapi:
+    image: marketplace
+    build: .
+    ports:
+      - "5000:80"
