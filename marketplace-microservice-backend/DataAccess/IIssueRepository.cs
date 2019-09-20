@@ -11,5 +11,6 @@ namespace marketplace_microservice_backend.DataAccess
         Issues GetIssuesById(string id);
         Issues GetAllIssues(Issues issues);
         User RegisterHub(User user);
+        void AddIssuesToDb(Issues issue);
     }
 }

@@ -63,5 +63,9 @@ namespace marketplace_microservice_backend.DataAccess
             context.User.InsertOne(user);
             return user;
         }
+        public void AddIssuesToDb(Issues issue) 
+        {
+            context.Issues.InsertOne(issue);
+        }
     }
 }

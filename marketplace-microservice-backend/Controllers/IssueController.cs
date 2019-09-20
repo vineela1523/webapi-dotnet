@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestSharp;
+using Json.Net;
 
 namespace marketplace_microservice_backend.Controllers
 {
@@ -81,11 +82,28 @@ namespace marketplace_microservice_backend.Controllers
                
 
                 object list = JsonConvert.DeserializeObject(response.Content);
-                Console.WriteLine(list);
-                Console.WriteLine(list.GetType().ToString());
+                dynamic _d = JsonConvert.DeserializeObject(response.Content);
+                Console.WriteLine(_d.Count);
+                List<Issues> issuesList = new List<Issues>();
+                foreach(var _dItem in _d)
+                {
+                    Issues _issue = new Issues();
+                    _issue.body = _dItem.body;
+                    _issue.title = _dItem.title;
+                    _issue.userName = user.UName;
+                    string[] _issueLabels = new string[_dItem.labels.Count];
+                    for(int i = 0; i < _issueLabels.Length; i++)
+                    {
+                        _issueLabels[i] = _dItem.labels[i].name;
+                    }
+                    _issue.labelNames = _issueLabels;
+                    issuesList.Add(_issue);
+                    service.AddIssuesToDb(_issue);
+                }
+                Console.WriteLine(issuesList.Count);
                 // AuthenticateUser(user);
                 // service.RegisterGitHub(user);
-                return Ok(list);
+                return Ok(issuesList);
             }
             catch (Exception)
             {

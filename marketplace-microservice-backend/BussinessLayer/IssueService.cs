@@ -38,7 +38,9 @@ namespace marketplace_microservice_backend.BussinessLayer
                 throw new UserNotFoundException("User Not Found");
             };
         }
-
-
+        public void AddIssuesToDb(Issues issue)
+        {
+            Repository.AddIssuesToDb(issue);
+        }
     }
 }

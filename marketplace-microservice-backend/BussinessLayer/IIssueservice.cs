@@ -11,6 +11,7 @@ namespace marketplace_microservice_backend.BussinessLayer
         Issues GetIssuesById(string id);
         Issues GetAllIssues(Issues issues);
         User RegisterGitHub(User user);
+        void AddIssuesToDb(Issues issue);
 
     }
 }
